@@ -1,0 +1,409 @@
+/* ============================================================
+   PhysixLab — lesson-viewer.css
+   Split layout: theory on the left, live 3D simulation on the
+   right. Consistent with the Deep Space Lab token system.
+   ============================================================ */
+
+:root {
+  --bg: #0a0e1a;
+  --cyan: #00e5ff;
+  --violet: #7c4dff;
+  --text: #e8ecf7;
+  --text-dim: #8892b0;
+  --text-dimmer: #5b6584;
+  --border: rgba(255, 255, 255, 0.08);
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-strong: rgba(255, 255, 255, 0.07);
+  --radius: 18px;
+  --font-display: 'Space Grotesk', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+main {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 7.5rem 2rem 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-bottom: 1.8rem;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.back-link svg { transition: transform 0.25s ease; }
+.back-link:hover { color: var(--cyan); }
+.back-link:hover svg { transform: translateX(-3px); }
+
+/* ---------------- Split layout ---------------- */
+
+.lesson-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.85fr) minmax(420px, 1.15fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ---------------- Theory panel ---------------- */
+
+.lesson-theory {
+  padding: 2.4rem 2rem;
+  border-radius: 20px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  position: sticky;
+  top: 6.5rem;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  animation: fade-up 0.6s var(--ease) both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lesson-theory::-webkit-scrollbar { width: 6px; }
+.lesson-theory::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 255, 0.3);
+  border-radius: 10px;
+}
+
+.lesson-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lesson-eyebrow .difficulty-badge {
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid;
+  text-transform: none;
+}
+
+.difficulty-badge.beginner { color: #00e676; border-color: rgba(0,230,118,0.4); background: rgba(0,230,118,0.08); }
+.difficulty-badge.intermediate { color: #ffd54f; border-color: rgba(255,213,79,0.4); background: rgba(255,213,79,0.08); }
+.difficulty-badge.advanced { color: #ff7043; border-color: rgba(255,112,67,0.4); background: rgba(255,112,67,0.08); }
+
+.lesson-theory h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+  margin-bottom: 1.1rem;
+  color: var(--text);
+}
+
+.lesson-intro {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.theory-section {
+  margin-bottom: 1.6rem;
+}
+
+.theory-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--cyan);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theory-section h2::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, var(--cyan), var(--violet));
+  flex-shrink: 0;
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+.theory-section p {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+.formula-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 1.8rem;
+}
+
+.formula-box {
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  background: linear-gradient(120deg, rgba(0,229,255,0.07), rgba(124,77,255,0.07));
+  border: 1px solid var(--border);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.formula-box:hover {
+  border-color: rgba(0, 229, 255, 0.4);
+  transform: translateX(3px);
+}
+
+.formula-box .label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-dimmer);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+}
+
+.formula-box .expr {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(100deg, var(--cyan), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------------- Simulation panel ---------------- */
+
+.lesson-sim { position: relative; }
+
+.sim-panel {
+  border-radius: 20px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+  animation: fade-up 0.7s var(--ease) both;
+  animation-delay: 0.1s;
+}
+
+.sim-canvas-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: radial-gradient(circle at 50% 30%, rgba(124,77,255,0.08), transparent 65%), #060a14;
+}
+
+#simCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+}
+
+#simCanvas:active { cursor: grabbing; }
+
+.sim-readout {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(10, 14, 26, 0.55);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.sim-readout .row { display: flex; gap: 0.5rem; }
+.sim-readout .row .val { color: var(--cyan); font-family: var(--font-display); font-weight: 600; }
+.sim-readout .flash {
+  color: #ffd54f;
+  font-weight: 600;
+  animation: flash-fade 1.2s ease forwards;
+}
+
+@keyframes flash-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.sim-controls {
+  padding: 1.4rem 1.6rem 1.6rem;
+  border-top: 1px solid var(--border);
+}
+
+.sim-buttons {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 1.4rem;
+}
+
+.sim-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--glass-strong);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.sim-btn svg { width: 15px; height: 15px; }
+
+.sim-btn:hover {
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+.sim-btn.primary {
+  background: linear-gradient(120deg, var(--cyan), var(--violet));
+  color: #06101d;
+  border: none;
+}
+
+.sim-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.sim-slider-row label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.sim-slider-row label .slider-val {
+  color: var(--cyan);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.sim-slider-row input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  outline: none;
+  cursor: pointer;
+}
+
+.sim-slider-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.35);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+
+.sim-slider-row input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 5px rgba(0, 229, 255, 0.45);
+}
+
+.sim-slider-row input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.35);
+  cursor: pointer;
+}
+
+.sim-hint {
+  margin-top: 1.1rem;
+  font-size: 0.8rem;
+  color: var(--text-dimmer);
+  line-height: 1.5;
+}
+
+/* ---------------- Lesson nav ---------------- */
+
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.lesson-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.3rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.lesson-nav-btn:hover {
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+.lesson-nav-btn.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 980px) {
+  .lesson-layout {
+    grid-template-columns: 1fr;
+  }
+  .lesson-theory {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 560px) {
+  main { padding-top: 6.5rem; }
+  .sim-buttons { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theory-section h2::before, .sim-readout .flash { animation: none !important; }
+}
