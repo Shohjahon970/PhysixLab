@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhysixLab — Learn Physics in 3D</title>
+<meta name="description" content="Learn physics through real interactive 3D simulations. Free lessons in mechanics, thermodynamics, electromagnetism, optics, waves and modern physics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css?v=2">
+<link rel="stylesheet" href="css/chat.css?v=2">
+</head>
+<body>
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div id="cursor-glow" aria-hidden="true"></div>
+
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="logo" aria-label="PhysixLab home">
+      <svg class="logo-atom" viewBox="0 0 40 40" aria-hidden="true">
+        <ellipse cx="20" cy="20" rx="17" ry="7" class="logo-orbit" transform="rotate(0 20 20)"/>
+        <ellipse cx="20" cy="20" rx="17" ry="7" class="logo-orbit" transform="rotate(60 20 20)"/>
+        <ellipse cx="20" cy="20" rx="17" ry="7" class="logo-orbit" transform="rotate(120 20 20)"/>
+        <circle cx="20" cy="20" r="4" class="logo-nucleus"/>
+      </svg>
+      <span class="logo-text">PhysixLab</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="#topics">Topics</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#topics" class="btn btn-glow nav-cta">Start Learning</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="#topics">Topics</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#topics" class="btn btn-glow">Start Learning</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p class="eyebrow reveal">A free interactive physics lab</p>
+      <h1 class="hero-title reveal">
+        <span class="gradient-text">Learn Physics</span><br>in Three Dimensions
+      </h1>
+      <p class="hero-subtitle reveal">
+        Stop imagining forces, fields and waves — watch them move. PhysixLab turns
+        equations into simulations you can rotate, tune and break.
+      </p>
+      <div class="hero-ctas reveal">
+        <a href="#topics" class="btn btn-primary">Explore Topics</a>
+        <a href="#simulation-preview" class="btn btn-outline">Try a Simulation</a>
+      </div>
+    </div>
+
+    <div class="hero-scene" id="heroScene" aria-label="Rotating 3D atom model" role="img">
+      <canvas id="atomCanvas"></canvas>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span></span>
+      <p>Scroll</p>
+    </div>
+  </section>
+
+  <section class="topics" id="topics">
+    <div class="section-head reveal">
+      <p class="eyebrow">Six branches, one lab</p>
+      <h2>Pick a branch of physics</h2>
+      <p class="section-sub">Every topic is a set of lessons paired with a real 3D simulation you control.</p>
+    </div>
+
+    <div class="topics-grid">
+      <a class="topic-card reveal" href="lessons.html?topic=mechanics" target="_blank" rel="noopener" style="--accent:#00e5ff">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M6 40 L24 8 L42 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="24" cy="8" r="3" fill="currentColor"/></svg>
+        </div>
+        <h3>Mechanics</h3>
+        <p>Motion, forces, energy</p>
+        <span class="topic-count">10 lessons</span>
+      </a>
+
+      <a class="topic-card reveal" href="lessons.html?topic=thermodynamics" target="_blank" rel="noopener" style="--accent:#ff7043">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M20 6 v22 a8 8 0 1 0 8 0 V6 Z" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="34" r="3" fill="currentColor"/></svg>
+        </div>
+        <h3>Thermodynamics</h3>
+        <p>Heat, temperature, entropy</p>
+        <span class="topic-count">9 lessons</span>
+      </a>
+
+      <a class="topic-card reveal" href="lessons.html?topic=electromagnetism" target="_blank" rel="noopener" style="--accent:#7c4dff">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M26 6 L10 28 h10 l-4 14 20-24 H26 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Electromagnetism</h3>
+        <p>Electricity, magnetism, circuits</p>
+        <span class="topic-count">10 lessons</span>
+      </a>
+
+      <a class="topic-card reveal" href="lessons.html?topic=optics" target="_blank" rel="noopener" style="--accent:#ffd54f">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><ellipse cx="24" cy="24" rx="9" ry="16" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M2 24 h14 M32 24 h14" stroke="currentColor" stroke-width="2.5"/></svg>
+        </div>
+        <h3>Optics</h3>
+        <p>Light, lenses, reflection, refraction</p>
+        <span class="topic-count">8 lessons</span>
+      </a>
+
+      <a class="topic-card reveal" href="lessons.html?topic=waves" target="_blank" rel="noopener" style="--accent:#00e5ff">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M4 28 q6 -14 12 0 t12 0 t12 0 t12 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Waves &amp; Oscillations</h3>
+        <p>Sound, vibration, wave motion</p>
+        <span class="topic-count">9 lessons</span>
+      </a>
+
+      <a class="topic-card reveal" href="lessons.html?topic=modern" target="_blank" rel="noopener" style="--accent:#7c4dff">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="4" fill="currentColor"/><ellipse cx="24" cy="24" rx="18" ry="7" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="24" rx="18" ry="7" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="18" ry="7" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(120 24 24)"/></svg>
+        </div>
+        <h3>Modern Physics</h3>
+        <p>Relativity, quantum, atomic physics</p>
+        <span class="topic-count">8 lessons</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="why" id="about">
+    <div class="section-head reveal">
+      <p class="eyebrow">Why PhysixLab</p>
+      <h2>Physics you can actually see</h2>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon" aria-hidden="true">◆</div>
+        <h3>Real 3D Simulations</h3>
+        <p>Every concept ships with a live Three.js simulation you can rotate, zoom and tune with sliders.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon" aria-hidden="true">◆</div>
+        <h3>AI Tutor 24/7</h3>
+        <p>Stuck at midnight? The lab's AI tutor is in the corner of every page, ready to explain.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon" aria-hidden="true">◆</div>
+        <h3>Interactive Lessons</h3>
+        <p>Theory, formulas and simulation live side by side — read a line, then watch it happen.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon" aria-hidden="true">◆</div>
+        <h3>Learn at Your Own Pace</h3>
+        <p>No accounts, no schedules. Pick a branch, pick a lesson, and go as deep as you want.</p>
+      </div>
+    </div>
+
+    <div class="stats-bar reveal">
+      <div class="stat">
+        <span class="stat-num" data-target="60" data-suffix="+">0</span>
+        <span class="stat-label">Lessons</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-target="6" data-suffix="">0</span>
+        <span class="stat-label">Branches</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-target="100" data-suffix="%">0</span>
+        <span class="stat-label">Free</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">PhysixLab</span>
+      <p>An interactive lab for learning physics in three dimensions.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Explore</h4>
+      <a href="#home">Home</a>
+      <a href="#topics">Topics</a>
+      <a href="#about">About</a>
+    </div>
+
+    <div class="footer-social">
+      <h4>Follow</h4>
+      <div class="social-icons">
+        <a href="#" aria-label="PhysixLab on X">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M3 3l7.5 9.5L3.4 21H6l5.8-6.6L16.5 21H21l-8-10.2L20.2 3h-2.6l-5.3 6.1L8.5 3H3z"/></svg>
+        </a>
+        <a href="#" aria-label="PhysixLab on GitHub">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.9-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.68-4.57 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+        </a>
+        <a href="#" aria-label="PhysixLab on YouTube">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M21.6 7.2s-.2-1.5-.83-2.16c-.8-.85-1.7-.85-2.1-.9C15.9 4 12 4 12 4s-3.9 0-6.67.14c-.4.05-1.3.05-2.1.9C2.6 5.7 2.4 7.2 2.4 7.2S2.2 9 2.2 10.8v1.4c0 1.8.2 3.6.2 3.6s.2 1.5.83 2.16c.8.85 1.85.82 2.32.91C7.2 19 12 19 12 19s3.9 0 6.67-.14c.4-.05 1.3-.05 2.1-.9.63-.66.83-2.16.83-2.16s.2-1.8.2-3.6v-1.4c0-1.8-.2-3.6-.2-3.6zM9.9 14.2V8.8l5.3 2.7-5.3 2.7z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 PhysixLab. All rights reserved.</p>
+  </div>
+</footer>
+
+<div id="chatRoot"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="js/three-hero.js?v=2"></script>
+<script src="js/main.js?v=2"></script>
+<script src="js/chat.js?v=2"></script>
+</body>
+</html>
